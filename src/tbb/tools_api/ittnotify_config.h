@@ -326,7 +326,11 @@ ITT_INLINE long
 __itt_interlocked_increment(volatile long* ptr) ITT_INLINE_ATTRIBUTE;
 ITT_INLINE long __itt_interlocked_increment(volatile long* ptr)
 {
+#ifdef __aarch64__
+    return __atomic_fetch_add(ptr, 1L, __ATOMIC_SEQ_CST) + 1L;
+#else
     return __TBB_machine_fetchadd4(ptr, 1) + 1L;
+#endif
 }
 #endif /* ITT_SIMPLE_INIT */
 #endif /* ITT_PLATFORM==ITT_PLATFORM_WIN */

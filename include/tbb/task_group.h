@@ -110,7 +110,7 @@ public:
 
     ~task_group_base() __TBB_NOEXCEPT(false) {
         if( my_root->ref_count() > 1 ) {
-            bool stack_unwinding_in_progress = std::uncaught_exception();
+            bool stack_unwinding_in_progress = std::uncaught_exceptions();
             // Always attempt to do proper cleanup to avoid inevitable memory corruption
             // in case of missing wait (for the sake of better testability & debuggability)
             if ( !is_canceling() )
