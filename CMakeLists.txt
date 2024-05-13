@@ -195,6 +195,7 @@ if (TBB_BUILD_STATIC)
   add_library(tbb_static STATIC ${tbb_src})
   set_property(TARGET tbb_static APPEND PROPERTY COMPILE_DEFINITIONS "__TBB_BUILD=1")
   set_property(TARGET tbb_static APPEND_STRING PROPERTY COMPILE_FLAGS ${ENABLE_RTTI})
+  set_property(TARGET tbb_static APPEND_STRING PROPERTY COMPILE_FLAGS "-fPIC ")
   install(TARGETS tbb_static ARCHIVE DESTINATION lib)
 endif()
 
